@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcc.travel.dao.IContractDao">
+    <resultMap id="resultMapUser" type="com.jcc.travel.entity.BasContract">
+        <id column="bas_id" property="BasId"></id>
+        <result column="bas_name" property="BasName"></result>
+        <result column="money" property="money"></result>
+        <result column="date" property="date"  />
+    </resultMap>
+
+    <delete id="delete" parameterType="com.jcc.travel.vo.ContractVo" >
+          delete from bas_contract
+        where bas_id=#{BasId}
+    </delete>
+
+    <select id="read"  resultMap="resultMapUser" useCache="true" parameterType="com.jcc.travel.vo.ContractVo">
+        select * from bas_contract
+        where bas_id =#{BasId}
+    </select>
+
+    <insert id="create" parameterType="com.jcc.travel.vo.ContractVo" >
+        insert into bas_contract(bas_id,bas_name,money,date)
+        values (#{BasId},#{BasName},#{money},#{date});
+    </insert>
+
+    <update id="update" parameterType="com.jcc.travel.vo.ContractVo">
+          update bas_contract
+          set bas_name=#{BasName},money=#{money},date=#{date}
+          where bas_id =#{BasId}
+    </update>
+</mapper>
